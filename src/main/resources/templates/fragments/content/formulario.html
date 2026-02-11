@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Producto</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+</head>
+
+<body>
+
+     <div th:fragment="content">
+        <h1>CREAR PRODUCTO</h1>
+        <div class="table-container">
+
+            <!-- Leemos un objeto "producto" desde el modelo que nos llega del controlador, aquí podremos meter los datos
+         en sus dos atributos: nombre y precio -->
+            <form th:action="@{/web/productos/nuevo}" th:object="${producto}" method="POST">
+                <div>
+                    <label>Nombre:</label>
+
+                    <!-- El asterisco lo que hace es generar name = "nombre" y el id = "nombre" estos valores
+                 serán lo que leamos en el controlador para guardarlos, además observa que es el nombre del atributo del producto-->
+                    <input type="text" th:field="*{nombre}" required>
+                </div>
+                <br>
+                <div>
+                    <label>Precio:</label>
+                    <!-- El asterisco lo que hace es generar name = "precio" y el id = "precio" estos valores
+                 serán lo que leamos en el controlador para guardarlos, además observa que es el nombre del atributo del producto-->
+                    <input type="number" step="0.01" th:field="*{precio}" required>
+                </div>
+
+                <br>
+                <button type="submit">Guardar Producto</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -7,11 +7,13 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import es.etg.dawes.micro.product.iu.view.ModelAttribute;
 
 import es.etg.dawes.micro.product.iu.model.Producto;
+import es.etg.dawes.micro.product.iu.view.FragmentoContenido;
+import es.etg.dawes.micro.product.iu.view.ModelAttribute;
 import es.etg.dawes.micro.product.iu.view.ThymView;
 import lombok.RequiredArgsConstructor;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -20,14 +22,24 @@ public class ProductController {
 
     @GetMapping("/web/productos")
     public String listar(Model model) {
-        // Consulto todos los productos y los meto en un atributo del modelo para poder acceder a ellos en la JSP.
-        model.addAttribute(ModelAttribute.PRODUCT_LIST.getName(), getTestData());
-        return ThymView.PRODUCT_LIST.getPath(); // Busca productos-lista.jsp
+        List<Producto> lista = getTestData();
+
+        //Indico el fragmento a cargar
+        model.addAttribute(ModelAttribute.FRAGMENTO_CONTENIDO.getName(), FragmentoContenido.PRODUCT_LIST.getPath());
+        model.addAttribute(ModelAttribute.PRODUCT_LIST.getName(), lista);
+        return ThymView.PRODUCT_MAIN.getPath();
+    }
+
+    @GetMapping("/web/productos/nuevo")
+    public String crear(Model model) {
+        //Indico el fragmento a cargar
+        model.addAttribute(ModelAttribute.FRAGMENTO_CONTENIDO.getName(), FragmentoContenido.PRODUCT_FORM.getPath());
+        model.addAttribute(ModelAttribute.SINGLE_PRODUCT.getName(), new Producto());
+        return ThymView.PRODUCT_MAIN.getPath();
     }
 
 
     private List<Producto> getTestData(){
-
         List<Producto> lista = new ArrayList<>();
         for(int i=0 ; i<10; i++){
             lista.add(new Producto(i, "Nombre"+i, Double.valueOf(i)));

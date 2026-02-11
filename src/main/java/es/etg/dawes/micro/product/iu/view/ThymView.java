@@ -1,6 +1,7 @@
 package es.etg.dawes.micro.product.iu.view;
 public enum ThymView {
     
+    PRODUCT_MAIN("productos-main"),
     PRODUCT_LIST("productos-lista"),
     PRODUCT_FORM("productos-formulario"),
     PRODUCT_CREATED("productos-creado"),

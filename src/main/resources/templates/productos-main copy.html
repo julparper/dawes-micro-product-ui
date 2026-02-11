@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MICRODAW S.A.</title>
+  <style>
+    /* Configuración básica para que la web ocupe toda la pantalla */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Estilo del Header */
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Contenedor principal (Menú + Contenido) */
+    .main-container {
+      display: flex;
+      flex: 1;
+      /* Esto hace que el centro crezca para empujar el footer abajo */
+    }
+
+    /* Menú Lateral */
+    nav {
+      background-color: #f4f4f4;
+      width: 200px;
+      padding: 20px;
+      border-right: 1px solid #ddd;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-bottom: 10px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    /* Contenido Central */
+    main {
+      flex: 1;
+      padding: 40px;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div th:replace="fragments/header::header-empresa">
+      <h1>MICRODAW S.A.</h1>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <nav>
+      <div th:replace="fragments/menu :: menu">
+
+        <h3>Menú sin fragmento</h3>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Servicios</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+
+      </div>
+    </nav>
+
+    <main>
+      <div th:replace="fragments/content :: content">
+        <h2>¡Hola mundo!</h2>
+        <p>Este contenido será sustitutido por los fragmentos</p>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <div th:replace="fragments/footer :: footer">
+      <p>&copy; 2026 MICRODAW S.A. - Todos los derechos reservados, sin el fragmento</p>
+    </div>
+  </footer>
+
+</body>
+
+</html>

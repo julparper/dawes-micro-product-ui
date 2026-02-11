@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos thymeleaf</title>
+    
+</head>
+
+<body>
+    <div th:fragment="content">
+
+        <h1>LISTADO DE PRODUCTOS</h1>
+        <div class="table-container">
+
+            <table id="tablaProductos">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTabla">
+                    <!-- Para cada elemento p de la lista de productos (que metimos en el modelo del controlador con el nombre "productos")-->
+                    <tr th:each="p : ${productos}">
+                        <td th:text="${p.id}">1</td>
+                        <td th:text="${p.nombre}">Producto Ejemplo</td>
+                        <td th:text="${p.precio}">0.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+
+</html>

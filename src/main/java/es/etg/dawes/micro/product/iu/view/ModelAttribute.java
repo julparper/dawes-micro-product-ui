@@ -2,6 +2,7 @@ package es.etg.dawes.micro.product.iu.view;
 
 public enum ModelAttribute {
     PRODUCT_LIST("productos"),
+    FRAGMENTO_CONTENIDO("content"),
     SINGLE_PRODUCT("producto"),
     ERROR_MESSAGE("errorMsg"),
     SUCCESS_MESSAGE("successMsg");
