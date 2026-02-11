@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MICRODAW S.A.</title>
   <link rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}">
+
+  <!-- HTMX-->
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 </head>
 
 <body>
@@ -26,11 +29,10 @@
           <li><a href="#">Servicios</a></li>
           <li><a href="#">Contacto</a></li>
         </ul>
-
       </div>
     </nav>
 
-    <main>
+    <main id="contenido-dinamico">
       <!-- En content le esto pasando el fragmento de contenido a cargar-->
       <div th:replace="${content} :: content">
         <h2>¡Hola mundo!</h2>

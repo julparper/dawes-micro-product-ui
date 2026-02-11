@@ -15,6 +15,7 @@
             <li><a th:href="@{/web/productos/nuevo}">Crear Nuevo</a></li>
             <li><a th:href="@{/web/productos}">Ver Listado</a></li>
         </ul>
+        <div hx-get="/api/hora" hx-trigger="every 5s" hx-swap="innerHTML"> Cargando ...</div>
 
     </div>
 </body>

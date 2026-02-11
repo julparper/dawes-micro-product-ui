@@ -50,6 +50,8 @@ public class ProductController {
         return ThymView.PRODUCT_MAIN.getPath();
     }
 
+
+
     private List<Producto> getTestData(){
         List<Producto> lista = new ArrayList<>();
         for(int i=0 ; i<10; i++){
