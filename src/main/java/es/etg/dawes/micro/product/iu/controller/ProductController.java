@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.etg.dawes.micro.product.iu.model.Producto;
 import es.etg.dawes.micro.product.iu.view.FragmentoContenido;
@@ -38,6 +40,15 @@ public class ProductController {
         return ThymView.PRODUCT_MAIN.getPath();
     }
 
+    @PostMapping("/web/productos/nuevo")
+    public String crearProducto(@RequestParam String nombre,
+            @RequestParam double precio,
+            Model model){
+        
+        listar(model);
+            
+        return ThymView.PRODUCT_MAIN.getPath();
+    }
 
     private List<Producto> getTestData(){
         List<Producto> lista = new ArrayList<>();
