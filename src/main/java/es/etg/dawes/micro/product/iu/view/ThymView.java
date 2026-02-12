@@ -1,13 +1,8 @@
 package es.etg.dawes.micro.product.iu.view;
 public enum ThymView {
     
-    PRODUCT_MAIN("productos-main"),
-    PRODUCT_LIST("productos-lista"),
-    PRODUCT_FORM("productos-formulario"),
-    PRODUCT_CREATED("productos-creado"),
-    PRODUCT_DETAIL("productos-detalle"),
-    ERROR_GENERIC("error/error-general");
-
+    PRODUCT_MAIN("productos-main");
+  
     private final String path;
 
     ThymView(String path) {
