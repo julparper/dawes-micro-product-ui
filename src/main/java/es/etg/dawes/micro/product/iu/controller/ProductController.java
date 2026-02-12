@@ -35,7 +35,8 @@ public class ProductController {
     @GetMapping("/web/productos/nuevo")
     public String crear(Model model) {
         //Indico el fragmento a cargar
-        model.addAttribute(ModelAttribute.FRAGMENTO_CONTENIDO.getName(), FragmentoContenido.PRODUCT_FORM.getPath());
+        model.addAttribute(ModelAttribute.FRAGMENTO_CONTENIDO.getName(), 
+                FragmentoContenido.PRODUCT_FORM.getPath());
         model.addAttribute(ModelAttribute.SINGLE_PRODUCT.getName(), new Producto());
         return ThymView.PRODUCT_MAIN.getPath();
     }
