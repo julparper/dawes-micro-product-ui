@@ -15,8 +15,9 @@ public class RestClientProductoAdapter {
 
     private final RestClient restClient;
 
-    public List<Producto> getAll() {
-        return restClient.get().retrieve().body(new ParameterizedTypeReference<List<Producto>>(){});
+    public List<Producto> getAll(String token) {
+
+        return restClient.get().headers(h -> h.setBearerAuth(token)).retrieve().body(new ParameterizedTypeReference<List<Producto>>(){});
     }
 
 }

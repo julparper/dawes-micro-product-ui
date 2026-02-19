@@ -12,21 +12,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.etg.dawes.micro.product.iu.model.Producto;
 import es.etg.dawes.micro.product.iu.model.api.RestClientProductoAdapter;
+import es.etg.dawes.micro.product.iu.model.auth.JwtService;
 import es.etg.dawes.micro.product.iu.view.FragmentoContenido;
 import es.etg.dawes.micro.product.iu.view.ModelAttribute;
 import es.etg.dawes.micro.product.iu.view.ThymView;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
+
+    public static final String SESION_JWT_TOKEN = "JWT_TOKEN";
+    public static final String USUARIO = "usuario";
     
     private final RestClientProductoAdapter restClient;
+    private final JwtService jwtService;
 
     @GetMapping("/web/productos")
-    public String listar(Model model) {
-        List<Producto> lista = restClient.getAll();
+    public String listar(Model model, HttpSession sesion) {
+
+        // Miro si el token está en la sesión del usuario, si no está lo genero y lo agrego a la sesión
+        String token = (String) sesion.getAttribute(SESION_JWT_TOKEN);
+        if (token == null) {
+            token = jwtService.generarToken(USUARIO);
+            sesion.setAttribute(SESION_JWT_TOKEN, token);
+        }
+
+        List<Producto> lista = restClient.getAll(token);
 
         //Indico el fragmento a cargar
         model.addAttribute(ModelAttribute.FRAGMENTO_CONTENIDO.getName(), FragmentoContenido.PRODUCT_LIST.getPath());
@@ -46,9 +60,9 @@ public class ProductController {
     @PostMapping("/web/productos/nuevo")
     public String crearProducto(@RequestParam String nombre,
             @RequestParam double precio,
-            Model model){
+            Model model, HttpSession sesion){
         
-        listar(model);
+        listar(model, sesion);
             
         return ThymView.PRODUCT_MAIN.getPath();
     }
