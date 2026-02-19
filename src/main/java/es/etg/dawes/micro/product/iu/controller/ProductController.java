@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.etg.dawes.micro.product.iu.model.Producto;
+import es.etg.dawes.micro.product.iu.model.api.RestClientProductoAdapter;
 import es.etg.dawes.micro.product.iu.view.FragmentoContenido;
 import es.etg.dawes.micro.product.iu.view.ModelAttribute;
 import es.etg.dawes.micro.product.iu.view.ThymView;
@@ -21,10 +22,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductController {
     
+    private final RestClientProductoAdapter restClient;
 
     @GetMapping("/web/productos")
     public String listar(Model model) {
-        List<Producto> lista = getTestData();
+        List<Producto> lista = restClient.getAll();
 
         //Indico el fragmento a cargar
         model.addAttribute(ModelAttribute.FRAGMENTO_CONTENIDO.getName(), FragmentoContenido.PRODUCT_LIST.getPath());
