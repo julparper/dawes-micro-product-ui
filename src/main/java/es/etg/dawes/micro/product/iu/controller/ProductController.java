@@ -30,15 +30,23 @@ public class ProductController {
     private final RestClientProductoAdapter restClient;
     private final JwtService jwtService;
 
-    @GetMapping("/web/productos")
-    public String listar(Model model, HttpSession sesion) {
 
+    public String getToken(HttpSession sesion){
         // Miro si el token está en la sesión del usuario, si no está lo genero y lo agrego a la sesión
         String token = (String) sesion.getAttribute(SESION_JWT_TOKEN);
         if (token == null) {
             token = jwtService.generarToken(USUARIO);
             sesion.setAttribute(SESION_JWT_TOKEN, token);
         }
+        return token;
+
+    }
+
+    @GetMapping("/web/productos")
+    public String listar(Model model, HttpSession sesion) {
+
+        // Recupero el token o lo creo
+        String token = getToken(sesion);
 
         List<Producto> lista = restClient.getAll(token);
 
@@ -62,6 +70,10 @@ public class ProductController {
             @RequestParam double precio,
             Model model, HttpSession sesion){
         
+        // Recupero el token o lo creo
+        String token = getToken(sesion);
+
+        restClient.crear(token, nombre, precio);
         listar(model, sesion);
             
         return ThymView.PRODUCT_MAIN.getPath();
